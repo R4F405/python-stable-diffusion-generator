@@ -39,34 +39,8 @@ Antes de ejecutar el generador, necesitas un token de acceso de Hugging Face:
    ```
    HUGGINGFACE_TOKEN=tu_token_aqui
    ```
-
-### Uso seguro del token
-
-Para mayor seguridad, se recomienda usar un archivo `.env` para almacenar tu token. Asegúrate de:
-
-1. Añadir la librería python-dotenv a tus dependencias:
-   ```
-   pip install python-dotenv
-   ```
-   o agrégala a requirements.txt:
-   ```
-   python-dotenv~=1.0.0
-   ```
-
-2. Nunca compartir o subir tu archivo `.env` a repositorios públicos (ya está incluido en `.gitignore`).
-
-3. Usar el token en tu código de esta manera:
-   ```python
-   import os
-   from dotenv import load_dotenv
    
-   # Cargar variables de entorno
-   load_dotenv()
-   
-   # Obtener token
-   token = os.getenv("HUGGINGFACE_TOKEN")
-   login(token)
-   ```
+> **Importante**: Nunca compartas tu token ni subas el archivo `.env` a repositorios públicos.
 
 ## Uso
 
@@ -80,16 +54,10 @@ Script optimizado para un uso general que detecta automáticamente si dispones d
 python GenerarImagenesFlux.py
 ```
 
-### 2. funcionales.txt (Script con ajustes para VRAM limitada)
+### 2. funcionales.py (Script con ajustes para VRAM limitada)
 
 Este archivo contiene un script optimizado para equipos con GPU pero VRAM limitada (aproximadamente 5GB):
 
-1. Renombra este archivo a una extensión .py:
-```
-ren funcionales.txt funcionales.py
-```
-
-2. Ejecútalo:
 ```
 python funcionales.py
 ```
