@@ -42,6 +42,34 @@ Antes de ejecutar el generador, necesitas un token de acceso de Hugging Face:
    
 > **Importante**: Nunca compartas tu token ni subas el archivo `.env` a repositorios públicos.
 
+## Instalación y Configuración de Stable Diffusion
+
+Este proyecto utiliza la librería `diffusers` que proporciona una API unificada para trabajar con modelos de difusión como Stable Diffusion. La biblioteca gestiona automáticamente la descarga e instalación del modelo necesario.
+
+### Modelo FLUX
+
+FLUX es una implementación eficiente de Stable Diffusion que ofrece generación de imágenes de alta calidad con menor uso de recursos. El script utiliza específicamente el modelo "FLUX.1-schnell" que equilibra velocidad y calidad.
+
+### Primera ejecución
+
+La primera vez que ejecutes cualquiera de los scripts:
+
+1. Se descargará automáticamente el modelo FLUX desde Hugging Face (aproximadamente 2GB)
+2. El modelo se almacenará en la caché local de Hugging Face (usualmente en `~/.cache/huggingface/`)
+3. Este proceso puede tardar algunos minutos dependiendo de tu conexión a internet
+
+### Requisitos de hardware
+
+- **Con GPU (NVIDIA)**: 
+  - Mínimo: 4GB VRAM (usando script optimizado con funcionales.py)
+  - Recomendado: 8GB+ VRAM para mejor rendimiento
+  - CUDA Toolkit instalado (se instala automáticamente con PyTorch)
+
+- **Sin GPU**: 
+  - Mínimo 16GB de RAM del sistema
+  - CPU con buena capacidad de procesamiento
+  - Ten en cuenta que la generación será significativamente más lenta
+
 ## Uso
 
 El repositorio contiene dos scripts principales:
