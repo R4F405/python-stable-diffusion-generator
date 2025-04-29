@@ -1,0 +1,135 @@
+# Generador de Imágenes con FLUX Stable Diffusion
+
+Este repositorio contiene un generador de imágenes basado en el modelo FLUX de Stable Diffusion, enfocado en proporcionar generación de imágenes de alta calidad con diferentes configuraciones de recursos.
+
+## Requisitos
+
+- Python 3.8 o superior
+- PyTorch 2.6.0 o compatible
+- CUDA (recomendado para aceleración GPU)
+- Cuenta en Hugging Face (para obtener un token de acceso)
+
+## Instalación
+
+1. Clona este repositorio:
+```
+git clone https://github.com/tu-usuario/python-stable-diffusion-generator.git
+cd python-stable-diffusion-generator
+```
+
+2. Crea un entorno virtual e instala las dependencias:
+```
+python -m venv .venv
+# En Windows
+.venv\Scripts\activate
+# En macOS/Linux
+source .venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+## Configuración
+
+Antes de ejecutar el generador, necesitas un token de acceso de Hugging Face:
+
+1. Regístrate en [Hugging Face](https://huggingface.co/)
+2. Ve a tu perfil → Settings → Access Tokens
+3. Crea un nuevo token
+4. Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
+   ```
+   HUGGINGFACE_TOKEN=tu_token_aqui
+   ```
+
+### Uso seguro del token
+
+Para mayor seguridad, se recomienda usar un archivo `.env` para almacenar tu token. Asegúrate de:
+
+1. Añadir la librería python-dotenv a tus dependencias:
+   ```
+   pip install python-dotenv
+   ```
+   o agrégala a requirements.txt:
+   ```
+   python-dotenv~=1.0.0
+   ```
+
+2. Nunca compartir o subir tu archivo `.env` a repositorios públicos (ya está incluido en `.gitignore`).
+
+3. Usar el token en tu código de esta manera:
+   ```python
+   import os
+   from dotenv import load_dotenv
+   
+   # Cargar variables de entorno
+   load_dotenv()
+   
+   # Obtener token
+   token = os.getenv("HUGGINGFACE_TOKEN")
+   login(token)
+   ```
+
+## Uso
+
+El repositorio contiene dos scripts principales:
+
+### 1. GenerarImagenesFlux.py
+
+Script optimizado para un uso general que detecta automáticamente si dispones de GPU:
+
+```
+python GenerarImagenesFlux.py
+```
+
+### 2. funcionales.txt (Script con ajustes para VRAM limitada)
+
+Este archivo contiene un script optimizado para equipos con GPU pero VRAM limitada (aproximadamente 5GB):
+
+1. Renombra este archivo a una extensión .py:
+```
+ren funcionales.txt funcionales.py
+```
+
+2. Ejecútalo:
+```
+python funcionales.py
+```
+
+## Parámetros personalizables
+
+Puedes modificar los siguientes parámetros en los scripts para personalizar la generación:
+
+- `prompt`: El texto descriptivo para generar la imagen
+- `guidance_scale`: Controla qué tanto la imagen se adhiere al prompt (0.0 = más libertad creativa)
+- `num_inference_steps`: Pasos de procesamiento (más pasos = mejor calidad pero más tiempo)
+- `width` y `height`: Dimensiones de la imagen generada
+- `generator.manual_seed()`: Semilla para reproducibilidad de resultados
+
+## Ajustes de rendimiento
+
+- Para equipos con poca VRAM:
+  - Reduce `num_inference_steps` a valores entre 4-20
+  - Utiliza resoluciones más bajas como 512x512
+  - Habilita `enable_attention_slicing()`
+  - Usa `torch.float16` en lugar de `torch.bfloat16`
+
+- Para equipos sin GPU:
+  - El script principal detectará automáticamente la ausencia de GPU y usará CPU
+  - Ten en cuenta que la generación en CPU será significativamente más lenta
+
+## Solución de problemas
+
+- **Error CUDA out of memory**: Reduce la resolución, los pasos de inferencia o utiliza el script optimizado para VRAM limitada.
+- **Errores de modelo**: Asegúrate de tener el token de Hugging Face correcto y una conexión a internet estable.
+- **Imágenes de baja calidad**: Aumenta el número de pasos de inferencia para mejorar la calidad.
+
+## Modelos disponibles
+
+El generador utiliza por defecto el modelo "black-forest-labs/FLUX.1-schnell", pero puedes experimentar con otros modelos de Stable Diffusion modificando la línea:
+
+```python
+pipe = FluxPipeline.from_pretrained("black-forest-labs/FLUX.1-schnell", ...)
+```
+
+## Licencia
+
+Consulta el archivo LICENSE para más información sobre los términos de uso de este repositorio. 
