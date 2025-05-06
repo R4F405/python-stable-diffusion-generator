@@ -13,7 +13,7 @@ This repository contains an image generator based on the FLUX model of Stable Di
 
 1. Clone this repository:
 ```bash
-git clone [https://github.com/tu-usuario/python-stable-diffusion-generator.git](https://github.com/tu-usuario/python-stable-diffusion-generator.git)
+git clone https://github.com/tu-usuario/python-stable-diffusion-generator.git
 cd python-stable-diffusion-generator
 ```
 
