@@ -1,131 +1,131 @@
-# 🎨 Generador de Imágenes con FLUX Stable Diffusion
+# 🎨 Image Generator with FLUX Stable Diffusion
 
-Este repositorio contiene un generador de imágenes basado en el modelo FLUX de Stable Diffusion, enfocado en proporcionar generación de imágenes de alta calidad con diferentes configuraciones de recursos.
+This repository contains an image generator based on the FLUX model of Stable Diffusion, focused on providing high-quality image generation with various resource configurations.
 
-## 📋 Requisitos
+## 📋 Requirements
 
-- 🐍 Python 3.8 o superior
-- 🔥 PyTorch 2.6.0 o compatible
-- 🖥️ CUDA (recomendado para aceleración GPU)
-- 🤗 Cuenta en Hugging Face (para obtener un token de acceso)
+- 🐍 Python 3.8 or higher
+- 🔥 PyTorch 2.6.0 or compatible
+- 🖥️ CUDA (recommended for GPU acceleration)
+- 🤗 Hugging Face account (to obtain an access token)
 
-## 💻 Instalación
+## 💻 Installation
 
-1. Clona este repositorio:
-```
-git clone https://github.com/tu-usuario/python-stable-diffusion-generator.git
+1. Clone this repository:
+```bash
+git clone [https://github.com/tu-usuario/python-stable-diffusion-generator.git](https://github.com/tu-usuario/python-stable-diffusion-generator.git)
 cd python-stable-diffusion-generator
 ```
 
-2. Crea un entorno virtual e instala las dependencias:
-```
+2. Create a virtual environment and install the dependencies:
+```bash
 python -m venv .venv
-# En Windows
+# On Windows
 .venv\Scripts\activate
-# En macOS/Linux
+# On macOS/Linux
 source .venv/bin/activate
 
 pip install -r requirements.txt
 ```
 
-## ⚙️ Configuración
+## ⚙️ Configuration
 
-Antes de ejecutar el generador, necesitas un token de acceso de Hugging Face:
+Before running the generator, you need a Hugging Face access token:
 
-1. Regístrate en [Hugging Face](https://huggingface.co/)
-2. Ve a tu perfil → Settings → Access Tokens
-3. Crea un nuevo token
-4. Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
+1. Sign up at [Hugging Face](https://huggingface.co/)
+2. Go to your profile → Settings → Access Tokens
+3. Create a new token
+4. Create a `.env` file in the project root with the following content:
    ```
-   HUGGINGFACE_TOKEN=tu_token_aqui
+   HUGGINGFACE_TOKEN=your_token_here
    ```
    
-> ⚠️ **Importante**: Nunca compartas tu token ni subas el archivo `.env` a repositorios públicos.
+> ⚠️ **Important**: Never share your token or upload the `.env` file to public repositories.
 
-## 🚀 Instalación y Configuración de Stable Diffusion
+## 🚀 Stable Diffusion Installation and Setup
 
-Este proyecto utiliza la librería `diffusers` que proporciona una API unificada para trabajar con modelos de difusión como Stable Diffusion. La biblioteca gestiona automáticamente la descarga e instalación del modelo necesario.
+This project uses the `diffusers` library, which provides a unified API for working with diffusion models like Stable Diffusion. The library automatically manages the download and installation of the required model.
 
-### 🌊 Modelo FLUX
+### 🌊 FLUX Model
 
-FLUX es una implementación eficiente de Stable Diffusion que ofrece generación de imágenes de alta calidad con menor uso de recursos. El script utiliza específicamente el modelo "FLUX.1-schnell" que equilibra velocidad y calidad.
+FLUX is an efficient implementation of Stable Diffusion that offers high-quality image generation with lower resource usage. The script specifically uses the "FLUX.1-schnell" model, which balances speed and quality.
 
-### 🔄 Primera ejecución
+### 🔄 First Run
 
-La primera vez que ejecutes cualquiera de los scripts:
+The first time you run any of the scripts:
 
-1. 📥 Se descargará automáticamente el modelo FLUX desde Hugging Face (aproximadamente 2GB)
-2. 💾 El modelo se almacenará en la caché local de Hugging Face (usualmente en `~/.cache/huggingface/`)
-3. ⏱️ Este proceso puede tardar algunos minutos dependiendo de tu conexión a internet
+1. 📥 The FLUX model will be automatically downloaded from Hugging Face (approximately 2GB).
+2. 💾 The model will be stored in the local Hugging Face cache (usually in `~/.cache/huggingface/`).
+3. ⏱️ This process may take a few minutes depending on your internet connection.
 
-### 🖥️ Requisitos de hardware
+### 🖥️ Hardware Requirements
 
-- **Con GPU (NVIDIA)**: 
-  - 🔋 Mínimo: 4GB VRAM (usando script optimizado con funcionales.py)
-  - 🔋🔋 Recomendado: 8GB+ VRAM para mejor rendimiento
-  - 🛠️ CUDA Toolkit instalado (se instala automáticamente con PyTorch)
+- **With GPU (NVIDIA)**:
+  - 🔋 Minimum: 4GB VRAM (using the script optimized with `funcionales.py`)
+  - 🔋🔋 Recommended: 8GB+ VRAM for better performance
+  - 🛠️ CUDA Toolkit installed (usually installed automatically with PyTorch if a compatible GPU is detected)
 
-- **Sin GPU**: 
-  - 💻 Mínimo 16GB de RAM del sistema
-  - 🔄 CPU con buena capacidad de procesamiento
-  - ⏱️ Ten en cuenta que la generación será significativamente más lenta
+- **Without GPU**:
+  - 💻 Minimum 16GB of system RAM
+  - 🔄 CPU with good processing power
+  - ⏱️ Be aware that generation will be significantly slower.
 
-## 🔍 Uso
+## 🔍 Usage
 
-El repositorio contiene dos scripts principales:
+The repository contains two main scripts:
 
 ### 1. 🚀 GenerarImagenesFlux.py
 
-Script optimizado para un uso general que detecta automáticamente si dispones de GPU:
+Optimized script for general use that automatically detects if you have a GPU:
 
-```
+```bash
 python GenerarImagenesFlux.py
 ```
 
-### 2. 🧰 funcionales.py (Script con ajustes para VRAM limitada)
+### 2. 🧰 funcionales.py (Script with adjustments for limited VRAM)
 
-Este archivo contiene un script optimizado para equipos con GPU pero VRAM limitada (aproximadamente 5GB):
+This file contains a script optimized for systems with a GPU but limited VRAM (around 5GB):
 
-```
+```bash
 python funcionales.py
 ```
 
-## 🎛️ Parámetros personalizables
+## 🎛️ Customizable Parameters
 
-Puedes modificar los siguientes parámetros en los scripts para personalizar la generación:
+You can modify the following parameters in the scripts to customize the generation:
 
-- 💬 `prompt`: El texto descriptivo para generar la imagen
-- 🎯 `guidance_scale`: Controla qué tanto la imagen se adhiere al prompt (0.0 = más libertad creativa)
-- 🔄 `num_inference_steps`: Pasos de procesamiento (más pasos = mejor calidad pero más tiempo)
-- 📐 `width` y `height`: Dimensiones de la imagen generada
-- 🎲 `generator.manual_seed()`: Semilla para reproducibilidad de resultados
+- 💬 `prompt`: The descriptive text to generate the image.
+- 🎯 `guidance_scale`: Controls how much the image adheres to the prompt (0.0 = more creative freedom).
+- 🔄 `num_inference_steps`: Processing steps (more steps = better quality but more time).
+- 📐 `width` and `height`: Dimensions of the generated image.
+- 🎲 `generator.manual_seed()`: Seed for reproducibility of results.
 
-## ⚡ Ajustes de rendimiento
+## ⚡ Performance Tuning
 
-- Para equipos con poca VRAM:
-  - 🔽 Reduce `num_inference_steps` a valores entre 4-20
-  - 🖼️ Utiliza resoluciones más bajas como 512x512
-  - 🧩 Habilita `enable_attention_slicing()`
-  - 📊 Usa `torch.float16` en lugar de `torch.bfloat16`
+- For systems with low VRAM:
+  - 🔽 Reduce `num_inference_steps` to values between 4-20.
+  - 🖼️ Use lower resolutions like 512x512.
+  - 🧩 Enable `enable_attention_slicing()`.
+  - 📊 Use `torch.float16` instead of `torch.bfloat16`.
 
-- Para equipos sin GPU:
-  - 🖥️ El script principal detectará automáticamente la ausencia de GPU y usará CPU
-  - ⏱️ Ten en cuenta que la generación en CPU será significativamente más lenta
+- For systems without GPU:
+  - 🖥️ The main script will automatically detect the absence of a GPU and use the CPU.
+  - ⏱️ Be aware that CPU generation will be significantly slower.
 
-## 🔧 Solución de problemas
+## 🔧 Troubleshooting
 
-- 🚫 **Error CUDA out of memory**: Reduce la resolución, los pasos de inferencia o utiliza el script optimizado para VRAM limitada.
-- 🔌 **Errores de modelo**: Asegúrate de tener el token de Hugging Face correcto y una conexión a internet estable.
-- 📉 **Imágenes de baja calidad**: Aumenta el número de pasos de inferencia para mejorar la calidad.
+- 🚫 **CUDA out of memory error**: Reduce the resolution, inference steps, or use the script optimized for limited VRAM.
+- 🔌 **Model errors**: Ensure you have the correct Hugging Face token and a stable internet connection.
+- 📉 **Low-quality images**: Increase the number of inference steps to improve quality.
 
-## 📚 Modelos disponibles
+## 📚 Available Models
 
-El generador utiliza por defecto el modelo "black-forest-labs/FLUX.1-schnell", pero puedes experimentar con otros modelos de Stable Diffusion modificando la línea:
+The generator uses the "black-forest-labs/FLUX.1-schnell" model by default, but you can experiment with other Stable Diffusion models by modifying the line:
 
 ```python
 pipe = FluxPipeline.from_pretrained("black-forest-labs/FLUX.1-schnell", ...)
 ```
 
-## 📄 Licencia
+## 📄 License
 
-Consulta el archivo LICENSE para más información sobre los términos de uso de este repositorio. 
+This project is licensed under the MIT License. Consult the [LICENSE](LICENSE) file for more details.
